@@ -20,7 +20,6 @@ namespace XStick_Config
                 {
                     if (!configuredPortNames.Contains(portName))
                     {
-                        configuredPortNames.Add(portName);
                         Console.Write("Configuring XStick on " + portName + "...");
                         try
                         {
@@ -46,10 +45,12 @@ namespace XStick_Config
                             serialPort.Write("ATFR\r");   // software reset
                             serialPort.Close();
                             Console.WriteLine("Compelte.");
+                            configuredPortNames.Add(portName);
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine("Failed (" + e.Message + ")");
+                            Thread.Sleep(1000);
                         }
                     }
                 }
